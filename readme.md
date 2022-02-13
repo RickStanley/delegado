@@ -1,0 +1,2 @@
+# Delegado
+A prototype project to create delegated events which unbinds strong references from them, so that the average developer would need to only remove local references by assigning `null` to variables.
