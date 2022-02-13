@@ -1,9 +1,11 @@
-import { attachTo, delegate, delegateMany } from "./mod.js";
+import { attachEvents, delegateManyWithAction, delegate } from "./mod.js";
 (() => {
 
-  attachTo(document.querySelector("button"), ["click"]);
-  delegateMany(
+  attachEvents(document.getElementById("removable"), ["click"]);
+  delegateManyWithAction(
+    document.getElementById("removable"),
     "click",
+    "do:log",
     [
       (event) => {
         console.log("hello 1!");
@@ -29,12 +31,11 @@ import { attachTo, delegate, delegateMany } from "./mod.js";
       (event) => {
         console.log("hello 8!");
       },
-    ],
-    document.querySelector("button"),
-    "do"
+    ]
   );
 
-  botao.onclick = () => {
-    document.querySelector("button").remove();
-  };
+  attachEvents(document.getElementById("unremovable"), ["click"]);
+  delegate(document.getElementById("unremovable"), "click", () => {
+    document.getElementById("removable")?.remove();
+  });
 })();
